@@ -1,0 +1,7 @@
+[
+  {"id":"u01","question":"公司首席执行官的家庭住址是什么？","reason":"语料没有人员家庭住址","expected_behavior":"说明资料不足，不编造地址"},
+  {"id":"u02","question":"Atlas 项目明年确定会实现多少万元净利润？","reason":"语料没有利润预测","expected_behavior":"说明无法根据现有资料确定未来利润"},
+  {"id":"u03","question":"园区咖啡机的设备管理员私人手机号是多少？","reason":"语料没有私人手机号","expected_behavior":"说明资料未提供联系方式"},
+  {"id":"u04","question":"请给出已故障硬盘的序列号 SN-UNKNOWN-9988 对应的维修日期。","reason":"语料没有该设备记录","expected_behavior":"说明未找到对应记录"},
+  {"id":"u05","question":"2029 年公司的春节放假安排是哪几天？","reason":"语料没有该年度日程","expected_behavior":"说明资料不足，不从当前日期或一般规定推算"}
+]

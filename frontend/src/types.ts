@@ -1,0 +1,11 @@
+export type User = { id: string; username: string; display_name: string; role: 'admin' | 'member'; active: boolean };
+export type KB = { id: string; name: string; description: string; document_count: number };
+export type Doc = { id: string; kb_id: string; title: string; status: string; chunk_count: number; warnings: string[]; current_version_id: string | null; latest_version_id: string; created_at: string };
+export type Job = { id: string; document_id: string; version_id: string; kind: string; status: string; stage: string; attempts: number; error_code: string | null; error_message: string | null; created_at: string; updated_at: string };
+export type Source = { block_id: string; page: number | null; paragraph: number; original: string; cleaned?: string; resolved?: string };
+export type Citation = { number: number; chunk_id: string; document_id: string; version_id: string; kb_id: string; title: string; sources: Source[]; score: number; heading_path: string[] };
+export type Mention = { raw: string; evidence: string; normalized: string | null };
+export type Chunk = { chunk_id: string; ordinal: number; body: string; heading_path: string[]; sources: Source[]; edits: Record<string, unknown>[]; metadata: { summary: string; keywords: string[]; time_mentions: Mention[]; locations: Mention[]; model: string } };
+export type Hit = { chunk_id: string; title: string; body: string; summary: string; paths: Record<string, { rank: number; score: number }>; rrf_score: number; rerank_score: number; sources: Source[]; keywords: string[] };
+export type Turn = { id: string; question: string; answer: string; citations: Citation[]; status: string; error_code?: string; draft_answer?: string; can_resume?: boolean };
+export type Conversation = { id: string; title: string };
