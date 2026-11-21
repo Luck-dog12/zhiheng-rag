@@ -1,5 +1,7 @@
 # 知衡 · 企业级 Agent RAG 工作台
 
+[![CI](https://github.com/Luck-dog12/zhiheng-rag/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Luck-dog12/zhiheng-rag/actions/workflows/ci.yml)
+
 面向企业内部知识问答的全栈应用：管理文档与知识库权限，让 DeepSeek 根据问题选择检索策略、评估证据并给出可追溯的回答。提供中文管理面板、流式问答、检索调试及文档入库 Worker。
 
 **所有模型和基础存储均通过外部服务连接。** 应用不下载模型权重，也不启动本地 Milvus、PostgreSQL 或对象存储。当前默认使用 **Qwen 稠密向量 + Milvus 内置 BM25**；同时支持 Qwen 稀疏向量方案进行对比。
@@ -161,6 +163,10 @@ docs/                      运维说明与按日期归档的验证报告
 ```
 
 ## 测试与评测
+
+GitHub Actions 在推送 `main`、提交 PR 或手动运行时执行后端检查、前端测试与构建、临时 PostgreSQL 集成测试、容器构建与启动冒烟检查。所有任务通过后，汇总检查 `CI required` 才成功。CI 不需要本机 `.env` 或真实模型密钥。
+
+另有手动 `Publish image` 工作流：仅允许选择 `main`，重新执行完整 CI，通过后将对应提交的镜像推送到 GitHub Container Registry（GHCR），输出镜像 digest。此步骤提供持续交付，尚未配置部署到实际服务器。使用方式、权限和环境接入见 [CI 与镜像交付](docs/ci-cd.md)。
 
 本地回归使用模拟模型、内存存储与测试数据库，不消耗真实模型额度：
 
