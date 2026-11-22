@@ -11,7 +11,19 @@
 
 [查看 Actions](https://github.com/Luck-dog12/zhiheng-rag/actions)。私有仓库的运行日志、构建产物和徽章需要相应访问权限。
 
-### CI 检查内容
+## 已验证的运行
+
+2026-11-22 复核：首次 CI 与镜像交付已在 GitHub runner 上实际完成，源码提交为 `ebbdf82b4756f7d930bdd6a6201b8a7056d1b4f9`。
+
+- [CI 运行记录](https://github.com/Luck-dog12/zhiheng-rag/actions/runs/44890292734)：Backend、Frontend、PostgreSQL、Container 和 `CI required` 全部成功。
+- [镜像交付记录](https://github.com/Luck-dog12/zhiheng-rag/actions/runs/44890532187)：重新检查同一提交后，GHCR 推送成功。
+- 已发布镜像：`ghcr.io/luck-dog12/zhiheng-rag:sha-ebbdf82b4756f7d930bdd6a6201b8a7056d1b4f9`。
+- 不可变引用：`ghcr.io/luck-dog12/zhiheng-rag@sha256:3744fa0d2f79820ffda97e9e74deadeb5523b137cec656d979a5053628b6107b`。
+- 匿名拉取授权检查返回 HTTP 401；需要有权限的登录凭证才能拉取。没有向实际应用服务器部署。
+
+上述结果只对应列明的提交；后续提交以各自 Actions 状态为准。
+
+## CI 检查内容
 
 - **Backend**：Python 3.12、与 Dockerfile 一致的 uv 0.9.26；`uv sync --locked` 校验依赖锁，Ruff，134 项不依赖外部服务的后端测试（数量随代码变化）。
 - **Frontend**：Node.js 24，与 Dockerfile 一致；`npm ci`、Vitest、TypeScript 检查、Vite 生产构建。
@@ -23,7 +35,7 @@
 
 临时数据库只用于 CI；应用生产配置仍只连接外部服务。容器冒烟仅验证镜像可运行及界面打包，**不等于真实模型问答、依赖就绪、20 路并发或生产验收**。CI 不安装浏览器；本机浏览器验证继续使用 Edge。
 
-### 持续交付：发布容器镜像
+## 持续交付：发布容器镜像
 
 1. 打开仓库 **Actions → Publish image → Run workflow**，分支选择 `main`。
 2. 工作流为选定的同一个提交重新执行 CI。失败时发布任务不会运行。
